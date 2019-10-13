@@ -12,6 +12,10 @@
 
 @implementation FluwxWXApiHandler
 - (void)registerApp:(FlutterMethodCall *)call result:(FlutterResult)result {
+    [WXApi startLogByLevel:WXLogLevelDetail logBlock:^(NSString * _Nonnull log) {
+        NSLog(@"wxlog: %@", log);
+    }];
+    
     if (!call.arguments[fluwxKeyIOS]) {
         result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @NO});
         return;

@@ -33,10 +33,10 @@ class _MyAppState extends State<MyApp> {
 
   _initFluwx() async {
     await fluwx.registerWxApi(
-        appId: "wxd930ea5d5a258f4f",
+        appId: "wxc35489ac71404a6a",
         doOnAndroid: true,
         doOnIOS: true,
-        universalLink: "https://your.univerallink.com/link/");
+        universalLink: "https://hata-group.com/");
     var result = await fluwx.isWeChatInstalled();
     print("is installed $result");
   }
