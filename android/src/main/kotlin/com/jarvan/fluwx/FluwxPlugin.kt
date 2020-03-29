@@ -33,6 +33,14 @@ class FluwxPlugin(private val registrar: Registrar, channel: MethodChannel) : Me
             FluwxRequestHandler.setRegistrar(registrar)
             FluwxResponseHandler.setMethodChannel(channel)
             channel.setMethodCallHandler(FluwxPlugin(registrar, channel))
+
+            registrar.publish(channel)
+        }
+
+        @JvmStatic
+        fun getChannel(registry: PluginRegistry): MethodChannel? {
+            var channel = registry.valuePublishedByPlugin<MethodChannel>("com.jarvan.fluwx.FluwxPlugin")
+            return channel
         }
     }
 
