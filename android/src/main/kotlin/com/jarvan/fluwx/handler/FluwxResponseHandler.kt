@@ -35,10 +35,23 @@ object FluwxResponseHandler {
     private const val openId = "openId"
     private const val type = "type"
 
+    private var channels = ArrayList<MethodChannel>()
+
     fun setMethodChannel(channel: MethodChannel) {
         FluwxResponseHandler.channel = channel
+        channels.add(channel)
     }
 
+    fun popChannel(channel: MethodChannel?) {
+        if (channel == null) return
+        channels.remove(channel)
+
+        if (channels.size > 0) {
+            FluwxResponseHandler.channel = channels.last();
+        } else {
+            FluwxResponseHandler.channel = null
+        }
+    }
 
     fun handleResponse(response: BaseResp) {
         when (response) {

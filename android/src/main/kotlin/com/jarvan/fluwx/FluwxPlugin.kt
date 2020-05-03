@@ -22,6 +22,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 class FluwxPlugin(private val registrar: Registrar, channel: MethodChannel) : MethodCallHandler {
@@ -33,6 +34,14 @@ class FluwxPlugin(private val registrar: Registrar, channel: MethodChannel) : Me
             FluwxRequestHandler.setRegistrar(registrar)
             FluwxResponseHandler.setMethodChannel(channel)
             channel.setMethodCallHandler(FluwxPlugin(registrar, channel))
+
+            registrar.publish(channel)
+        }
+
+        @JvmStatic
+        fun getChannel(registry: PluginRegistry): MethodChannel? {
+            var channel = registry.valuePublishedByPlugin<MethodChannel>("com.jarvan.fluwx.FluwxPlugin")
+            return channel
         }
     }
 
